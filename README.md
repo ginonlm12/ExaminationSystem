@@ -51,10 +51,10 @@ This is a fully functional Online Exam System built using **Python**, **Django**
 Here are some screenshots of the Online Exam System interface:
 
 ### Admin Dashboard
-![Admin Dashboard](static\app_interface\AdminDashboard.png)
+![Admin Dashboard](static/app_interface/AdminDashboard.png)
 
 ### Homepage 
-![Homepage ](static/app_interface/student_dashboard.png)
+![Homepage ](static/app_interface/screenshot_1735127992.png)
 
 ## Tech Stack
 
