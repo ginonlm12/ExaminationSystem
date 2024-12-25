@@ -46,6 +46,16 @@ This is a fully functional Online Exam System built using **Python**, **Django**
 - **Take Exams**: Students can select one answer per question, review their answers, and submit.
 - **View Exam Results**: Students can view their results after submitting the exam.
 
+## Screenshots
+
+Here are some screenshots of the Online Exam System interface:
+
+### Admin Dashboard
+![Admin Dashboard](static\app_interface\AdminDashboard.png)
+
+### Homepage 
+![Homepage ](static/app_interface/student_dashboard.png)
+
 ## Tech Stack
 
 - **Python**
