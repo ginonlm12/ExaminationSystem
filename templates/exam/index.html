@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: #f8f9fa; /* Màu nền tổng thể */
+    }
+
+    .jumbotron {
+      margin-bottom: 0px;
+      padding: 50px 20px;
+      background: #ffffff; /* Hoặc thử #eaf6ff cho xanh nhạt */
+      color: #333; /* Màu chữ tối để nổi bật trên nền sáng */
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Thêm bóng nhẹ */
+    }
+
+    .jumbotron h2 {
+      font-weight: 700;
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    .jumbotron p.lead {
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .btn {
+      font-size: 18px;
+      font-weight: 600;
+      padding: 15px 30px;
+      color: white;
+      background: linear-gradient(to right, #4facfe, #00f2fe); /* Gradient nút */
+      border: none;
+      border-radius: 50px; /* Bo tròn nút */
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4); /* Hiệu ứng bóng */
+    }
+
+    .btn:hover {
+      background: linear-gradient(to right, #00f2fe, #4facfe); /* Hiệu ứng hover */
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(79, 172, 254, 0.5); /* Hiệu ứng bóng hover */
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  {% include "exam/navbar.html" %}
+
+  <section id="section-jumbotron" class="jumbotron jumbotron-fluid d-flex justify-content-center align-items-center">
+    <div class="container text-center">
+      <h2 class="display-3">Hệ thống thi trắc nghiệm trực tuyến</h2>
+      <p class="lead">Đăng nhập để bắt đầu thi trực tuyến</p>
+      <p><strong>Bắt đầu ngay:</strong></p>
+      <a href="/student/studentsignup" class="btn btn-lg">
+        <i class="fa fa-graduation-cap" aria-hidden="true"></i> Đăng ký ngay
+      </a>
+    </div>
+  </section>
+
+  {% include "exam/footer.html" %}
+</body>
+
+</html>

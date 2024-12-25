@@ -1,0 +1,106 @@
+{% extends 'exam/adminbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f7fa;
+        }
+
+        a:link {
+            text-decoration: none;
+        }
+
+        .card {
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            margin-bottom: 30px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-block {
+            padding: 25px;
+            color: white;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .card-text {
+            font-size: 30px;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        .bg-c-blue {
+            background: linear-gradient(to right, #2a5298, #1e3c72);
+        }
+
+        .bg-c-yellow {
+            background: linear-gradient(to right, #f39c12, #f1c40f);
+        }
+
+        .f-left {
+            margin-right: 15px;
+        }
+
+        .row {
+            margin-top: 50px;
+        }
+
+        header {
+            background: linear-gradient(to right, #2a5298, #1e3c72);
+            color: white;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-xl-4">
+            <a href="admin-view-teacher" class="card bg-c-blue">
+                <div class="card-block">
+                    <h6 class="card-title">Tổng số giáo viên đã duyệt</h6>
+                    <h2 class="card-text"><i class="fas fa-chalkboard-teacher f-left"></i><span>{{ total_teacher }}</span></h2>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4 col-xl-4">
+            <a href="admin-view-pending-teacher" class="card bg-c-yellow">
+                <div class="card-block">
+                    <h6 class="card-title">Tổng số giáo viên đang chờ duyệt</h6>
+                    <h2 class="card-text"><i class="fas fa-sync-alt f-left"></i><span>{{ pending_teacher }}</span></h2>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+{% endblock content %}

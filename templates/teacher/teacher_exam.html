@@ -1,0 +1,97 @@
+{% extends 'teacher/teacherbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    .order-card {
+      color: white;
+      border-radius: 15px; /* Rounded corners */
+      transition: all 0.3s ease;
+    }
+
+    .order-card:hover {
+      transform: scale(1.05); /* Slight zoom effect on hover */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    }
+
+    .bg-c-blue {
+      background: linear-gradient(to right, #1d3557, #457b9d); /* Gradient for Add Courses */
+    }
+
+    .bg-c-green {
+      background: linear-gradient(to right, #2a2a72, #009ffd); /* Gradient for View Courses */
+    }
+
+    .card {
+      margin-bottom: 30px;
+      border: none;
+    }
+
+    .card .card-block {
+      padding: 25px;
+    }
+
+    .order-card h6 {
+      font-size: 18px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .order-card i {
+      font-size: 36px; /* Larger icons */
+    }
+
+    .container {
+      margin-top: 50px; /* Spacing above */
+    }
+  </style>
+</head>
+
+<div class="container">
+  <h1>Chào mừng bạn, {{ request.user.first_name }}!</h1>
+  <div class="row">
+    <!-- Add Course Card -->
+    <div class="col-md-6 col-xl-6">
+      <a href="teacher-add-exam" style="text-decoration: none; color: white;">
+        <div class="card bg-c-blue order-card">
+          <div class="card-block">
+            <h6 class="m-b-20">Thêm khóa thi</h6>
+            <h2 class="text-right"><i class="fas fa-plus f-left"></i></h2>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- View Courses Card -->
+    <div class="col-md-6 col-xl-6">
+      <a href="teacher-view-exam" style="text-decoration: none; color: white;">
+        <div class="card bg-c-green order-card">
+          <div class="card-block">
+            <h6 class="m-b-20">Xem khóa thi</h6>
+            <h2 class="text-right"><i class="fas fa-eye f-left"></i></h2>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<br><br><br><br><br>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+{% endblock content %}

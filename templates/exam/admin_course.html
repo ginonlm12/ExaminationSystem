@@ -1,0 +1,125 @@
+{% extends 'exam/adminbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" rel="stylesheet">
+    
+    <style type="text/css">
+      body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f4f6f9;
+      }
+
+      .order-card {
+        color: rgb(255, 255, 255);
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
+      }
+
+      .order-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .bg-c-blue {
+        background: linear-gradient(to right, #1d3557, #457b9d); /* Gradient xanh đậm */
+      }
+
+      .bg-c-gtx {
+        background: linear-gradient(to right, #303a3c, #2e414a); /* Gradient xám đậm */
+      }
+
+      .card-block {
+        padding: 30px;
+      }
+
+      .order-card h6 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .order-card i {
+        font-size: 26px;
+      }
+
+      .f-left {
+        float: left;
+      }
+
+      .f-right {
+        float: right;
+      }
+
+      .container {
+        margin-top: 50px;
+      }
+
+      header {
+        background: linear-gradient(to right, #2a5298, #1e3c72);
+        color: white;
+        padding: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      h3 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 700;
+      }
+
+      footer {
+        background: linear-gradient(to right, #2a5298, #1e3c72);
+        color: white;
+        padding: 15px;
+        text-align: center;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+      }
+
+    </style>
+</head>
+
+<div class="container">
+    <div class="row">
+        <!-- Thêm khóa thi -->
+        <div class="col-md-6 col-xl-6">
+            <a href="admin-add-course" style="text-decoration: none; color: white;">
+                <div class="card bg-c-blue order-card">
+                    <div class="card-block">
+                        <h6 class="m-b-20">Thêm khóa thi</h6>
+                        <h2 class="text-right"><i class="fas fa-plus f-left"></i></h2>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Xem khóa thi -->
+        <div class="col-md-6 col-xl-6">
+            <a href="admin-view-course" style="text-decoration: none; color: white;">
+                <div class="card bg-c-gtx order-card">
+                    <div class="card-block">
+                        <h6 class="m-b-20">Xem khóa thi</h6>
+                        <h2 class="text-right"><i class="fas fa-eye f-left"></i></h2>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    &copy; {% now 'Y' %} Hệ thống thi trực tuyến QLTTM. All rights reserved.
+</footer>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+{% endblock content %}

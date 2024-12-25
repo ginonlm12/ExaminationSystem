@@ -1,0 +1,151 @@
+{% extends 'exam/adminbase.html' %}
+{% block content %}
+{% load static %}
+
+<head>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    h6 {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .panel {
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .panel-heading {
+      background: linear-gradient(to right, #2a5298, #1e3c72); /* Gradient màu cho header */
+      color: white;
+      border-radius: 15px 15px 0 0;
+      padding: 15px;
+    }
+
+    .table {
+      border-radius: 15px;
+      overflow: hidden;
+      border: none;
+    }
+
+    .table th, .table td {
+      padding: 15px;
+      text-align: center;
+    }
+
+    .table th {
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    .table-bordered {
+      border-radius: 15px;
+      border: 2px solid #ddd;
+    }
+
+    .table-hover tbody tr:hover {
+      background: #f1f1f1;
+    }
+
+    .btn {
+      background: linear-gradient(to right, #2a5298, #1e3c72); /* Gradient xanh dương */
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 15px;
+      border-radius: 25px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background: linear-gradient(to right, #1e3c72, #2a5298); /* Hiệu ứng hover */
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .container {
+      margin-top: 50px;
+      padding: 20px;
+    }
+
+    .search-container {
+      margin-bottom: 20px;
+    }
+
+    .search-actions {
+      display: flex;
+      justify-content: space-between;
+    }
+
+  </style>
+</head>
+
+<br><br>
+<div class="container">
+  <div class="panel panel-primary rounded-0">
+
+    <!-- Thêm thanh tìm kiếm và tải xuống Excel -->
+    <div class="search-actions mb-4">
+      <form method="GET" class="form-inline">
+        <input type="text" name="search" value="{{ request.GET.search }}" class="form-control form-control-sm mr-2" placeholder="Tìm kiếm theo tên, liên hệ, địa chỉ">
+        <button type="submit" class="btn btn-primary btn-sm">Tìm kiếm</button>
+      </form>
+      <a href="{% url 'export-teacher-excel' %}" class="btn btn-success btn-sm">Tải về Excel</a>
+    </div>
+
+    <!-- Bảng học viên -->
+    <div class="panel panel-primary rounded-0">
+      <div class="panel-heading rounded-0">
+        <h6 class="panel-title text-white">Danh sách học viên</h6>
+      </div>
+      <table class="table table-hover table-bordered rounded" id="dev-table">
+        <thead>
+          <tr>
+            <th>Tên học viên</th>
+            <th>Ảnh đại diện</th>
+            <th>Liên hệ</th>
+            <th>Địa chỉ</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for t in students %}
+          <tr>
+            <td>{{ t.user.first_name }} {{ t.user.last_name }}</td>
+            <td><img src="{% static t.profile_pic.url %}" alt="Ảnh đại diện" height="40px" width="40px" class="rounded-circle" /></td>
+            <td>{{ t.mobile }}</td>
+            <td>{{ t.address }}</td>
+            <td class="text-center">
+              <a class="btn btn-info btn-xs rounded-circle" href="{% url 'update-student' t.id %}">
+                <small class="fas fa-edit"></small> Chỉnh sửa
+              </a>
+              <a class="btn btn-danger btn-xs rounded-circle" href="{% url 'delete-student' t.id %}" onclick="return confirm('Bạn có chắc chắn muốn xóa học viên này?')">
+                <small class="fas fa-trash"></small> Xóa tài khoản
+              </a>
+              <a class="btn btn-danger btn-xs rounded-circle" href="{% url 'update-student-password' t.id %}">
+                <small class="fas fa-trash"></small> Đổi mật khẩu
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<br><br><br><br><br><br>
+{% endblock content %}

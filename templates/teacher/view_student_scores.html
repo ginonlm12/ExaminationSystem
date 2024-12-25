@@ -1,0 +1,194 @@
+{% extends 'teacher/teacherbase.html' %}
+{% block content %}
+<style>
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f7fa;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    margin-top: 50px;
+    padding: 20px;
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #2a5298;
+  }
+
+  .table th, .table td {
+    padding: 15px;
+    text-align: center;
+  }
+
+  .table th {
+    background-color: #f8f9fa;
+    color: #333;
+  }
+
+  .btn {
+    background: linear-gradient(to right, #1e3c72, #2a5298); /* Gradient cho button */
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 15px;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn:hover {
+    background: linear-gradient(to right, #2a5298, #1e3c72); /* Hiệu ứng hover */
+  }
+
+  .table-bordered {
+    border-radius: 15px;
+    border: 2px solid #ddd;
+  }
+
+  .table-hover tbody tr:hover {
+    background: #f1f1f1;
+  }
+
+  /* Style cho bảng */
+  .table {
+    border-radius: 15px;
+    overflow: hidden;
+    border: none;
+    background: white;
+  }
+  
+  .table th {
+    background: linear-gradient(to right, #2a5298, #1e3c72); /* Gradient cho header */
+    color: white;
+  }
+  
+  .table td {
+    background-color: #ffffff; /* Màu nền cho các dòng */
+  }
+  
+  /* Màu nền gradient nhẹ khi hover */
+  .table-hover tbody tr:hover {
+    background: linear-gradient(to right, #e1f5fe, #b3e5fc); /* Gradient nhẹ khi hover */
+  }
+
+  /* Style cho nút Excel */
+  .btn-lg {
+    font-size: 18px;
+    padding: 15px 30px;
+  }
+</style>
+
+<h2 class="text-center my-4 text-primary">Điểm của các học viên - {{ course.exam_name }}</h2>
+
+<!-- Thêm thanh tìm kiếm -->
+<div class="mb-4 text-center">
+  <form method="get">
+    <input type="text" name="search" value="{{ search_query }}" class="form-control form-control-lg" placeholder="Tìm kiếm theo tên học viên">
+    <button type="submit" class="btn btn-primary mt-3">Tìm kiếm</button>
+  </form>
+</div>
+
+<!-- Thống kê chi tiết điểm học sinh -->
+<div class="table-responsive mb-5">
+  <table class="table table-bordered table-striped" style="background: linear-gradient(to right, #2a5298, #1e3c72);">
+    <thead>
+      <tr>
+        <th>Tên học viên</th>
+        <th>Điểm</th>
+        <th>Thời gian làm bài</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for result in results %}
+      <tr>
+        <td>{{ result.student.user.first_name }} {{ result.student.user.last_name }}</td>
+        <td>{{ result.marks }}</td>
+        <td>{{ result.date }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<!-- Đồ thị cho lượt 1 -->
+<div class="container mb-5">
+  <h3 class="text-center mb-4">Điểm cao nhất trong lượt 1</h3>
+  <canvas id="firstAttemptChart" style="height: 400px; width: 100%;"></canvas>
+</div>
+
+<!-- Đồ thị cho điểm cao nhất trong các lượt thi -->
+<div class="container mb-5">
+  <h3 class="text-center mb-4">Điểm cao nhất trong các lượt thi</h3>
+  <canvas id="highestMarksChart" style="height: 400px; width: 100%;"></canvas>
+</div>
+
+<!-- Thêm Chart.js để vẽ biểu đồ -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  // Lượt 1 - Điểm cao nhất trong lượt 1 của học sinh
+  var firstAttemptLabels = [{% for student, marks in first_attempt_marks.items %}'{{ student }}',{% endfor %}];
+  var firstAttemptData = [{% for student, marks in first_attempt_marks.items %}{{ marks }},{% endfor %}];
+  
+  var ctx1 = document.getElementById('firstAttemptChart').getContext('2d');
+  var firstAttemptChart = new Chart(ctx1, {
+    type: 'bar',
+    data: {
+      labels: firstAttemptLabels,
+      datasets: [{
+        label: 'Điểm cao nhất trong lượt 1',
+        data: firstAttemptData,
+        backgroundColor: '#4caf50',
+        borderColor: '#388e3c',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+  // Điểm cao nhất trong các lượt thi
+  var highestMarksLabels = [{% for student, marks in highest_marks.items %}'{{ student }}',{% endfor %}];
+  var highestMarksData = [{% for student, marks in highest_marks.items %}{{ marks }},{% endfor %}];
+
+  var ctx2 = document.getElementById('highestMarksChart').getContext('2d');
+  var highestMarksChart = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+      labels: highestMarksLabels,
+      datasets: [{
+        label: 'Điểm cao nhất trong các lượt thi',
+        data: highestMarksData,
+        backgroundColor: '#e74c3c',
+        borderColor: '#c0392b',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+<!-- Thêm chức năng tải xuống file Excel -->
+<div class="text-center mt-4 mb-5">
+  <a href="?export=excel" class="btn btn-lg" style="background: linear-gradient(to right, #2a5298, #1e3c72); color: white; font-weight: 600; padding: 12px 25px;">Tải về Excel</a>
+</div>
+
+{% endblock content %}

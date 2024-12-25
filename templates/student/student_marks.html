@@ -1,0 +1,103 @@
+{% extends 'student/studentbase.html' %}
+{% block content %}
+{% load static %}
+
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .row {
+      margin: 100px;
+    }
+
+    /* Bo tròn bảng */
+    table {
+      border-radius: 15px; /* Làm bo tròn góc bảng */
+      overflow: hidden; /* Đảm bảo bo tròn hiển thị đúng */
+      border-collapse: separate; /* Viền bảng không bị dính */
+      background-color: #f9f9f9; /* Nền bảng màu nhạt */
+    }
+
+    th, td {
+      border: 1px solid #ddd; /* Viền của các ô */
+      padding: 10px;
+      text-align: center; /* Căn giữa nội dung */
+    }
+
+    table tr:hover {
+      background-color: #f1f1f1; /* Hiệu ứng hover trên hàng */
+    }
+
+    /* Bo tròn panel */
+    .panel {
+      border-radius: 15px; /* Làm bo tròn toàn bộ panel */
+      overflow: hidden;
+    }
+
+    .panel-heading {
+      border-top-left-radius: 15px; /* Bo tròn góc trên trái */
+      border-top-right-radius: 15px; /* Bo tròn góc trên phải */
+      background: linear-gradient(to right, rgb(41, 82, 117), rgb(29, 9, 79)); /* Gradient cho heading */
+      color: white; /* Màu chữ */
+      padding: 10px;
+      text-align: center;
+    }
+
+    /* Bo tròn nút */
+    .btn {
+      border-radius: 15px; /* Làm bo tròn nút */
+      background: linear-gradient(to right, rgb(41, 82, 117), rgb(29, 9, 79)); /* Gradient nút */
+      color: white;
+      border: none;
+      padding: 5px 15px;
+    }
+
+    .btn:hover {
+      background: linear-gradient(to right, rgb(29, 9, 79), rgb(41, 82, 117)); /* Hiệu ứng hover */
+      color: #f9f9f9;
+    }
+  </style>
+</head>
+
+<br><br>
+<div class="container">
+  <h1>Chào mừng bạn, {{ request.user.first_name }}!</h1>
+  <div class="panel panel-primary" style="border-radius: 15px;">
+    <div class="panel-heading" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+      <h6 class="panel-title">Điểm của tôi</h6>
+    </div>
+    <table class="table table-hover table-bordered" style="border-radius: 15px; overflow: hidden;">
+      <thead>
+        <tr>
+          <th>Khóa học</th>
+          <th>Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for t in courses %}
+        <tr>
+          <td>{{ t.course_name }}</td>
+          <td class='text-center'>
+            <a class="btn btn-primary btn-sm" href="{% url 'check-marks' t.id %}">
+              <span class="glyphicon glyphicon-eye-open"></span> Xem điểm thi
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br><br><br><br><br><br>
+{% endblock content %}

@@ -1,0 +1,223 @@
+{% extends 'student/studentbase.html' %}
+{% block content %}
+{% load static %}
+
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap&subset=vietnamese" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f6f9;
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .question-box {
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .question-box.selected {
+            background-color: #f1f1f1;
+        }
+
+        .question-box.selected-answer {
+            background-color: #d3d3d3;
+        }
+
+        .selected-answer {
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+        }
+
+        .btn {
+            background: linear-gradient(to right, #4caf50, #81c784);
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 12px 25px;
+            border-radius: 25px;
+            border: none;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: linear-gradient(to right, #66bb6a, #4caf50);
+        }
+
+        #timer {
+            font-size: 24px;
+            font-weight: bold;
+            color: #d9534f;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-check-label {
+            font-size: 16px;
+        }
+
+        .form-check {
+            margin-bottom: 20px;
+        }
+
+        .question-container {
+            margin-bottom: 30px;
+        }
+
+        .question-header {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .question-marks {
+            font-size: 16px;
+            color: #555;
+            text-align: right;
+        }
+    </style>
+</head>
+
+<div class="row">
+    <!-- Left side: Questions Form -->
+    <div class="col-md-8">
+        <div class="form-container">
+            <form class="form" autocomplete="off" action="/student/calculate-marks" method="POST">
+                {% csrf_token %}
+                
+                {% for q in questions %}
+                <div class="question-container" id="question_{{ q.id }}" onclick="highlightQuestion({{ q.id }})">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="question-header">
+                            <h3>{{ forloop.counter }}. {{ q.question }}</h3>
+                        </div>
+                        <div class="question-marks">
+                            <h4>[{{ q.marks }}]</h4>
+                        </div>
+                    </div>
+
+                    <!-- Multiple options with checkboxes -->
+                    {% if q.option1 %}
+                    <div class="form-check mx-4">
+                        <input class="form-check-input" type="checkbox" name="question_{{ q.id }}_Option1" id="option1_{{ q.id }}" value="Option1">
+                        <label class="form-check-label ml-5" for="option1_{{ q.id }}">{{ q.option1 }}</label>
+                    </div>
+                    {% endif %}
+                    
+                    {% if q.option2 %}
+                    <div class="form-check mx-4">
+                        <input class="form-check-input" type="checkbox" name="question_{{ q.id }}_Option2" id="option2_{{ q.id }}" value="Option2">
+                        <label class="form-check-label ml-5" for="option2_{{ q.id }}">{{ q.option2 }}</label>
+                    </div>
+                    {% endif %}
+                    
+                    {% if q.option3 %}
+                    <div class="form-check mx-4">
+                        <input class="form-check-input" type="checkbox" name="question_{{ q.id }}_Option3" id="option3_{{ q.id }}" value="Option3">
+                        <label class="form-check-label ml-5" for="option3_{{ q.id }}">{{ q.option3 }}</label>
+                    </div>
+                    {% endif %}
+            
+                    {% if q.option4 %}
+                    <div class="form-check mx-4">
+                        <input class="form-check-input" type="checkbox" name="question_{{ q.id }}_Option4" id="option4_{{ q.id }}" value="Option4">
+                        <label class="form-check-label ml-5" for="option4_{{ q.id }}">{{ q.option4 }}</label>
+                    </div>
+                    {% endif %}
+            
+                    {% if q.option5 %}
+                    <div class="form-check mx-4">
+                        <input class="form-check-input" type="checkbox" name="question_{{ q.id }}_Option5" id="option5_{{ q.id }}" value="Option5">
+                        <label class="form-check-label ml-5" for="option5_{{ q.id }}">{{ q.option5 }}</label>
+                    </div>
+                    {% endif %}
+            
+                    {% if q.option6 %}
+                    <div class="form-check mx-4">
+                        <input class="form-check-input" type="checkbox" name="question_{{ q.id }}_Option6" id="option6_{{ q.id }}" value="Option6">
+                        <label class="form-check-label ml-5" for="option6_{{ q.id }}">{{ q.option6 }}</label>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+
+                <button type="submit" class="btn btn-lg rounded-0">Nộp bài</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Right side: Student Info -->
+    <div class="col-md-3">
+        <div class="student-info-container">
+            <p><strong>Tên học viên:</strong> {{ request.user.first_name }} {{ request.user.last_name }}</p>
+            <h2>Bài thi: {{ course.course_name }}</h2>
+            <div id="timer">Thời gian còn lại: <span id="time"></span></div>
+            <h5><strong>Danh sách câu hỏi</strong></h5>
+            <div id="questions-summary">
+                {% for q in questions %}
+                    <div class="question-box" id="question_{{ q.id }}" onclick="highlightQuestion({{ q.id }})">
+                        Câu {{ forloop.counter }} <span id="answer_{{ q.id }}"></span>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Set the countdown timer in minutes (e.g., 2 minutes per question)
+    let timeRemaining = {{ questions.count }} * 3 * 60;
+
+    // Update the timer every second
+    let timerInterval = setInterval(function() {
+        let minutes = Math.floor(timeRemaining / 60);
+        let seconds = timeRemaining % 60;
+        document.getElementById("time").textContent = minutes + "m " + seconds + "s";
+        timeRemaining--;
+        if (timeRemaining < 0) {
+            clearInterval(timerInterval);
+            document.querySelector("form").submit();
+        }
+    }, 1000);
+
+    // Toggle the background color of the selected question
+    function highlightQuestion(questionId) {
+        document.getElementById('question_' + questionId).classList.toggle('selected');
+    }
+</script>
+
+<br><br><br><br><br><br>
+{% endblock content %}

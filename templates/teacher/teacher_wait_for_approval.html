@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+{% load widget_tweaks %}
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: #f9f9f9;
+    }
+
+    .jumbotron {
+      margin: 0;
+      padding: 50px;
+      text-align: center;
+      background-color: #fff;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .jumbotron h1 {
+      font-size: 36px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 20px; /* Khoảng cách dưới tiêu đề */
+    }
+
+    .jumbotron p.lead {
+      font-size: 18px;
+      font-weight: 500;
+      color: #555;
+      line-height: 1.5; /* Điều chỉnh khoảng cách dòng */
+      margin-bottom: 20px; /* Khoảng cách giữa các đoạn văn */
+    }
+
+    .btn {
+      font-size: 18px;
+      font-weight: 600;
+      padding: 10px 25px;
+      color: white;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      border: none;
+      border-radius: 25px; /* Bo tròn góc nút */
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(255, 95, 109, 0.3); /* Đổ bóng */
+    }
+
+    .btn:hover {
+      background: linear-gradient(to right, #00f2fe, #4facfe);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 95, 109, 0.4); /* Hiệu ứng bóng hover */
+    }
+  </style>
+</head>
+
+<body>
+  {% include "exam/navbar.html" %}
+
+  <div class="jumbotron">
+    <h1 class="display-4">Xin chào {{ request.user.first_name }},</h1>
+    <p class="lead">Tài khoản của bạn hiện chưa được <b>kích hoạt</b>. <br>
+      Vui lòng chờ quản trị viên phê duyệt tài khoản của bạn. <br>
+      Bạn sẽ sớm nhận được thông báo sau khi tài khoản được kích hoạt.
+    </p>
+    <hr class="my-4">
+    <p class="lead">
+      <a class="btn" href="/logout" role="button">Đăng xuất</a>
+    </p>
+  </div>
+
+  {% include "exam/footer.html" %}
+</body>
+
+</html>

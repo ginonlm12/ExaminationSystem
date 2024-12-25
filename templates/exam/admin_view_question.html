@@ -1,0 +1,133 @@
+{% extends 'exam/adminbase.html' %}
+{% block content %}
+{%load static%}
+
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    h6 {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .panel {
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .panel-heading {
+      background: linear-gradient(to right, #2a5298, #1e3c72); /* Gradient màu cho header */
+      color: white;
+      border-radius: 15px 15px 0 0;
+      padding: 15px;
+    }
+
+    .table {
+      border-radius: 15px;
+      overflow: hidden;
+      border: none;
+    }
+
+    .table th, .table td {
+      padding: 15px;
+      text-align: center;
+    }
+
+    .table th {
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    .table-bordered {
+      border-radius: 15px;
+      border: 2px solid #ddd;
+    }
+
+    .table-hover tbody tr:hover {
+      background: #f1f1f1;
+    }
+
+    .btn {
+      background: linear-gradient(to right, #2a5298, #1e3c72); /* Gradient xanh dương */
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 15px;
+      border-radius: 25px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background: linear-gradient(to right, #1e3c72, #2a5298); /* Hiệu ứng hover */
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .container {
+      margin-top: 50px;
+      padding: 20px;
+    }
+
+    .search-container {
+      margin-bottom: 20px;
+    }
+
+    .search-actions {
+      display: flex;
+      justify-content: space-between;
+    }
+
+  </style>
+</head>
+<br><br>
+<div class="container">
+  <div class="panel panel-primary rounded-0">
+    <div class="panel-heading rounded-0">
+      <h6 class="panel-title">Bộ câu hỏi có sẵn</h6>
+    </div>
+    <table class="table table-hover table-bordered" id="dev-table">
+      <thead>
+        <tr>
+
+          <th>Tên khóa học</th>
+          <th>Số câu hỏi</th>
+          <th>Tổng điểm</th>
+          <th>Xem</th>
+        </tr>
+      </thead>
+      {% for c in courses %}
+      <tr>
+
+        <td> {{c.course_name}}</td>
+        <td>{{c.question_number}}</td>
+        <td>{{c.total_marks}}</td>
+        <td>
+        <a class="btn btn-danger btn-xs rounded-circle" href="{% url 'view-question' c.id   %}">
+          <small class="glyphicon glyphicon-eye-open"></small> Chi tiết
+        </a>
+      </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+<br><br><br><br><br><br>
+{% endblock content %}

@@ -1,0 +1,136 @@
+{% extends 'exam/adminbase.html' %}
+{% block content %}
+{% load static %}
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <style>
+    <style>
+      body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f5f7fa;
+        margin: 0;
+        padding: 0;
+      }
+  
+      h6 {
+        text-align: center;
+        font-size: 18px;
+        font-weight: 600;
+        color: #fff;
+      }
+  
+      .panel {
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+  
+      .panel-heading {
+        background: linear-gradient(to right, #2a5298, #1e3c72); /* Gradient màu cho header */
+        color: white;
+        border-radius: 15px 15px 0 0;
+        padding: 15px;
+      }
+  
+      .table {
+        border-radius: 15px;
+        overflow: hidden;
+        border: none;
+      }
+  
+      .table th, .table td {
+        padding: 15px;
+        text-align: center;
+      }
+  
+      .table th {
+        background-color: #f8f9fa;
+        color: #333;
+      }
+  
+      .table-bordered {
+        border-radius: 15px;
+        border: 2px solid #ddd;
+      }
+  
+      .table-hover tbody tr:hover {
+        background: #f1f1f1;
+      }
+  
+      .btn {
+        background: linear-gradient(to right, #2a5298, #1e3c72); /* Gradient xanh dương */
+        color: white;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 8px 15px;
+        border-radius: 25px;
+        transition: background-color 0.3s ease;
+      }
+  
+      .btn:hover {
+        background: linear-gradient(to right, #1e3c72, #2a5298); /* Hiệu ứng hover */
+      }
+  
+      h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 28px;
+        font-weight: 700;
+      }
+  
+      .container {
+        margin-top: 50px;
+        padding: 20px;
+      }
+  
+      .search-container {
+        margin-bottom: 20px;
+      }
+  
+      .search-actions {
+        display: flex;
+        justify-content: space-between;
+      }
+  
+    </style>
+</head>
+
+<br><br>
+<div class="container">
+  <div class="panel panel-primary rounded-0">
+    <div class="panel-heading rounded-0">
+      <h6 class="panel-title">Các khóa học</h6>
+    </div>
+    <table class="table table-hover table-bordered" id="dev-table">
+      <thead>
+        <tr>
+          <th>Khóa học</th>
+          <th>Tổng số câu hỏi</th>
+          <th>Tổng điểm</th>
+          <th>Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for t in courses %}
+        <tr>
+          <td>{{ t.course_name }}</td>
+          <td>{{ t.question_number }}</td>
+          <td>{{ t.total_marks }}</td>
+          <td class="text-center">
+            <a class="btn btn-danger btn-xs" style="border-radius: 25px;" href="{% url 'delete-course' t.id %}">
+              <span class="glyphicon glyphicon-trash"></span> Xóa
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br><br><br><br><br><br>
+{% endblock content %}

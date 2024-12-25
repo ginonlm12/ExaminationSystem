@@ -1,0 +1,107 @@
+{% extends 'teacher/teacherbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      margin-top: 50px;
+      padding: 20px;
+    }
+
+    .form-group label {
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .form-control {
+      border-radius: 10px; /* Bo tròn góc input */
+      box-shadow: none;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    .form-control:focus {
+      border-color: #4caf50;
+      box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+    }
+
+    .btn {
+      background: linear-gradient(to right, #2196f3, #1976d2); /* Gradient xanh dương cho nút */
+      color: white;
+      padding: 12px 20px;
+      font-size: 18px;
+      font-weight: 600;
+      border: none;
+      border-radius: 100px; /* Bo tròn nút */
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background: linear-gradient(to right, #42a5f5, #2196f3); /* Gradient đổi màu khi hover */
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .form-control-sm {
+      font-size: 14px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-container {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 15px; /* Bo tròn góc form */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+  </style>
+</head>
+
+<div class="container">
+  <div class="form-container">
+    <h2>Thêm thông tin khóa thi</h2>
+    <form method="POST" autocomplete="off">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="course_name">Tên khóa thi</label>
+        {% render_field courseForm.course_name class="form-control form-control-sm rounded-0" placeholder="Ví dụ: Cơ sở dữ tợn" %}
+      </div>
+
+      <div class="form-group">
+        <label for="course_description">Mô tả khóa thi (không bắt buộc)</label>
+        <textarea name="course_description" class="form-control form-control-sm rounded-0" placeholder="Ví dụ: Khóa học về cơ sở dữ liệu" rows="4"></textarea>
+      </div>
+
+      <!-- Các trường "Tổng số câu hỏi" và "Tổng điểm" không hiển thị trên form -->
+      <input type="hidden" name="question_number" value="0">
+      <input type="hidden" name="total_marks" value="0">
+
+      <button type="submit" class="btn btn-lg rounded-0">Lưu</button>
+    </form>
+  </div>
+</div>
+
+{% endblock content %}

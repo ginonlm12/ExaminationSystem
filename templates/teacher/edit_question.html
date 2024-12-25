@@ -1,0 +1,87 @@
+{% extends 'teacher/teacherbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+  <div class="container my-5">
+    <div class="form-container p-5 shadow-lg rounded">
+      <h2 class="text-center mb-4">Sửa câu hỏi</h2>
+
+      <!-- Display messages (success or error) -->
+      {% if messages %}
+        <div class="alert alert-success">
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <form method="POST" autocomplete="off">
+        {% csrf_token %}
+
+        <!-- Khóa thi -->
+        <div class="form-group">
+          <label for="course_name">Khóa thi</label>
+          {% render_field form.courseID class="form-control form-control-sm rounded-0" required="true" %}
+        </div>
+
+        <!-- Câu hỏi -->
+        <div class="form-group">
+          <label for="question">Câu hỏi</label>
+          {% render_field form.question class="form-control form-control-sm rounded-0" required="true" placeholder="Câu hỏi" %}
+        </div>
+
+        <!-- Điểm -->
+        <div class="form-group">
+          <label for="marks">Tổng điểm</label>
+          {% render_field form.marks class="form-control form-control-sm rounded-0" required="true" placeholder="Điểm" %}
+        </div>
+
+        <!-- Lựa chọn 1 -->
+        <div class="form-group">
+          <label>Lựa chọn 1</label>
+          {% render_field form.option1 class="form-control form-control-sm rounded-0" required="true" placeholder="Lựa chọn 1" %}
+          <input type="checkbox" name="correct_answers" value="Option1" class="form-check-input" {% if 'Option1' in form.instance.correct_answers %} checked {% endif %}> Đáp án đúng
+        </div>
+
+        <!-- Lựa chọn 2 -->
+        <div class="form-group">
+          <label>Lựa chọn 2</label>
+          {% render_field form.option2 class="form-control form-control-sm rounded-0" required="true" placeholder="Lựa chọn 2" %}
+          <input type="checkbox" name="correct_answers" value="Option2" class="form-check-input" {% if 'Option2' in form.instance.correct_answers %} checked {% endif %}> Đáp án đúng
+        </div>
+
+        <!-- Lựa chọn 3 -->
+        <div class="form-group">
+          <label>Lựa chọn 3</label>
+          {% render_field form.option3 class="form-control form-control-sm rounded-0" placeholder="Lựa chọn 3" %}
+          <input type="checkbox" name="correct_answers" value="Option3" class="form-check-input" {% if 'Option3' in form.instance.correct_answers %} checked {% endif %}> Đáp án đúng
+        </div>
+
+        <!-- Lựa chọn 4 -->
+        <div class="form-group">
+          <label>Lựa chọn 4</label>
+          {% render_field form.option4 class="form-control form-control-sm rounded-0" placeholder="Lựa chọn 4" %}
+          <input type="checkbox" name="correct_answers" value="Option4" class="form-check-input" {% if 'Option4' in form.instance.correct_answers %} checked {% endif %}> Đáp án đúng
+        </div>
+
+        <!-- Lựa chọn 5 -->
+        <div class="form-group">
+          <label>Lựa chọn 5</label>
+          {% render_field form.option5 class="form-control form-control-sm rounded-0" placeholder="Lựa chọn 5" %}
+          <input type="checkbox" name="correct_answers" value="Option5" class="form-check-input" {% if 'Option5' in form.instance.correct_answers %} checked {% endif %}> Đáp án đúng
+        </div>
+
+        <!-- Lựa chọn 6 -->
+        <div class="form-group">
+          <label>Lựa chọn 6</label>
+          {% render_field form.option6 class="form-control form-control-sm rounded-0" placeholder="Lựa chọn 6" %}
+          <input type="checkbox" name="correct_answers" value="Option6" class="form-check-input" {% if 'Option6' in form.instance.correct_answers %} checked {% endif %}> Đáp án đúng
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary btn-lg">Cập nhật câu hỏi</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock content %}

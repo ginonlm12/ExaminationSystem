@@ -1,0 +1,124 @@
+{% extends 'exam/adminbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+{% load static %}
+
+<head>
+  <style media="screen">
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      margin-top: 50px;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 30px;
+      font-weight: 700;
+      color: #2a5298;
+    }
+
+    label {
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-container {
+      background-color: #ffffff;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      margin-left: auto;
+      margin-right: auto;
+      width: 60%;
+    }
+
+    .form-control-sm {
+      font-size: 14px;
+    }
+
+    .btn {
+      background: linear-gradient(to right, #2a5298, #1e3c72); /* Gradient xanh cho nút */
+      color: white;
+      padding: 12px 25px;
+      font-size: 18px;
+      font-weight: 600;
+      border: none;
+      border-radius: 50px; /* Bo tròn nút */
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: linear-gradient(to right, #1e3c72, #2a5298); /* Hiệu ứng hover */
+    }
+  </style>
+</head>
+
+<br><br>
+<h2>Cập nhật thông tin học viên</h2>
+
+<!-- Hiển thị thông báo nếu có -->
+{% if messages %}
+  <div class="alert alert-success">
+    {% for message in messages %}
+      <p>{{ message }}</p>
+    {% endfor %}
+  </div>
+{% endif %}
+
+<div>
+  <form method="post" autocomplete="off" enctype="multipart/form-data" class="form-container">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <label for="first_name">Tên</label>
+      {% render_field userForm.first_name class="form-control form-control-sm rounded-0" placeholder="Ví dụ: An" %}
+    </div>
+
+    <div class="form-group">
+      <label for="last_name">Họ</label>
+      {% render_field userForm.last_name class="form-control form-control-sm rounded-0" placeholder="Ví dụ: Nguyễn Văn" %}
+    </div>
+
+    <div class="form-group">
+      <label for="mobile">Liên hệ</label>
+      {% render_field teacherForm.mobile class="form-control form-control-sm rounded-0" placeholder="Số điện thoại" %}
+    </div>
+
+    <div class="form-group">
+      <label for="address">Địa chỉ</label>
+      {% render_field teacherForm.address class="form-control form-control-sm rounded-0" placeholder="Địa chỉ thường trú" %}
+    </div>
+
+    <div class="form-group">
+      <label for="username">Tên tài khoản</label>
+      {% render_field userForm.username class="form-control form-control-sm rounded-0" placeholder="Tên tài khoản" %}
+    </div>
+
+    <div class="form-group">
+      <label for="profile_pic">Ảnh đại diện</label>
+      {% render_field teacherForm.profile_pic class="form-control form-control-sm rounded-0" placeholder="Ảnh đại diện" %}
+    </div>
+
+    <div class="text-center">
+      <input type="submit" class="btn btn-lg rounded-0 btn-primary" value="Cập nhật">
+    </div>
+  </form>
+</div>
+
+<br><br><br><br><br><br><br><br>
+
+{% endblock content %}

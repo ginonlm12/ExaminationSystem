@@ -1,0 +1,98 @@
+{% extends 'student/studentbase.html' %}
+{% block content %}
+{% load static %}
+
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .row {
+      margin: 100px;
+    }
+
+    table {
+      border-radius: 15px; /* Làm bo tròn các góc của bảng */
+      overflow: hidden; /* Đảm bảo các viền không bị cắt */
+      background-color: #f9f9f9; /* Nền bảng màu nhạt */
+      border-collapse: separate; /* Giữ các góc của bảng bo tròn */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Thêm hiệu ứng đổ bóng */
+    }
+  
+    th, td {
+      border: 1px solid #ddd; /* Tạo viền cho các ô */
+      padding: 10px;
+      text-align: center; /* Căn giữa nội dung */
+    }
+  
+    table tr:hover {
+      background-color: #f1f1f1; /* Hiệu ứng hover khi di chuột qua hàng */
+    }
+
+    .panel {
+      border-radius: 15px; /* Làm bo tròn khung panel */
+    }
+
+    .panel-heading {
+      border-top-left-radius: 15px; /* Bo tròn góc trên trái */
+      border-top-right-radius: 15px; /* Bo tròn góc trên phải */
+      background: linear-gradient(to right, rgb(41, 82, 117), rgb(29, 9, 79)); /* Màu gradient cho heading */
+      color: white; /* Màu chữ */
+      text-align: center; /* Căn giữa nội dung */
+      padding: 10px; /* Khoảng cách padding */
+    }
+
+    .btn {
+      border-radius: 15px; /* Làm bo tròn nút bấm */
+      background: linear-gradient(to right, rgb(11, 65, 112), rgb(29, 9, 79)); /* Gradient cho nút */
+      color: white;
+      border: none;
+    }
+
+    .btn:hover {
+      background: linear-gradient(to right, rgb(29, 9, 79), rgb(11, 65, 112)); /* Hiệu ứng hover cho nút */
+      color: #f9f9f9;
+    }
+  </style>
+</head>
+
+<br><br>
+<div class="container">
+  <div class="panel panel-primary rounded-0" style="border-radius: 15px;">
+    <div class="panel-heading rounded-0" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+      <h6 class="panel-title">Điểm của tôi</h6>
+    </div>
+    <table class="table table-hover table-bordered" id="dev-table" style="border-radius: 15px; overflow: hidden;">
+      <thead>
+        <tr>
+          <th>Bài thi</th>
+          <th>Tổng điểm</th>
+          <th>Lượt thi</th>
+          <th>Ngày thi</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for t in results %}
+        <tr>
+          <td>{{ t.exam }}</td>
+          <td>{{ t.marks }}</td>
+          <td>Lượt {{ forloop.counter }}</td>
+          <td>{{ t.date }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br><br><br><br><br><br>
+{% endblock content %}

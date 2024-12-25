@@ -1,0 +1,115 @@
+{% extends 'teacher/teacherbase.html' %}
+{% block content %}
+<style>
+  .table {
+    border-radius: 15px;
+    overflow: hidden;
+    border: none;
+    background: white;
+  }
+  
+  .table th {
+    background: linear-gradient(to right, #2a5298, #1e3c72); /* Gradient cho header */
+    color: white;
+  }
+  
+  .table td {
+    background-color: #ffffff; /* Màu nền cho các dòng */
+  }
+  
+  /* Màu nền gradient nhẹ khi hover */
+  .table-hover tbody tr:hover {
+    background: linear-gradient(to right, #e1f5fe, #b3e5fc); /* Gradient nhẹ khi hover */
+  }
+</style>
+
+<h2 class="text-center my-4 text-primary">Thống kê câu hỏi - {{ course.course_name }}</h2>
+
+<!-- Biểu đồ thống kê số lượt đúng/sai -->
+<div class="container mb-5">
+  <h3 class="text-center mb-4">Số lượt trả lời đúng và sai cho mỗi câu hỏi</h3>
+  <canvas id="questionChart" style="height: 400px; width: 100%;"></canvas>
+</div>
+
+<!-- Thống kê chi tiết câu hỏi -->
+<div class="table-responsive">
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Câu hỏi</th>
+        <th>Số lượt trả lời đúng</th>
+        <th>Số lượt trả lời sai</th>
+        <th>Tổng số lượt tham gia</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for stat in question_stats %}
+      <tr>
+        <td>{{ stat.question }}</td>
+        <td>{{ stat.correct_count }}</td>
+        <td>{{ stat.incorrect_count }}</td>
+        <td>{{ stat.total_count }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<!-- Thêm Chart.js để vẽ biểu đồ -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  // Kiểm tra dữ liệu từ backend
+  var questionLabels = [{% for stat in question_stats %}'{{ stat.question }}',{% endfor %}];
+  var correctCounts = [{% for stat in question_stats %}{{ stat.correct_count }},{% endfor %}];
+  var incorrectCounts = [{% for stat in question_stats %}{{ stat.incorrect_count }},{% endfor %}];
+
+  console.log('Question Labels:', questionLabels);
+  console.log('Correct Counts:', correctCounts);
+  console.log('Incorrect Counts:', incorrectCounts);
+
+  // Tạo biểu đồ
+  var ctx = document.getElementById('questionChart').getContext('2d');
+  var questionChart = new Chart(ctx, {
+    type: 'bar', // Loại biểu đồ
+    data: {
+      labels: questionLabels,
+      datasets: [{
+        label: 'Số lượt trả lời đúng',
+        data: correctCounts,
+        backgroundColor: '#4caf50', // Màu sắc cho cột đúng
+        borderColor: '#388e3c',
+        borderWidth: 1
+      },
+      {
+        label: 'Số lượt trả lời sai',
+        data: incorrectCounts,
+        backgroundColor: '#e74c3c', // Màu sắc cho cột sai
+        borderColor: '#c0392b',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              return context.dataset.label + ': ' + context.raw;
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+{% endblock content %}

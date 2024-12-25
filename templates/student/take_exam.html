@@ -1,0 +1,60 @@
+{% extends 'student/studentbase.html' %}
+{% block content %}
+{%load static%}
+
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <style media="screen">
+    .card {
+        border-radius: 15px; /* Bo tròn toàn bộ thẻ */
+    }
+    
+    .card-footer {
+        border-bottom-left-radius: 15px; /* Bo tròn góc dưới bên trái */
+        border-bottom-right-radius: 15px; /* Bo tròn góc dưới bên phải */
+    }
+    
+    .btn {
+        border-radius: 15px; /* Bo tròn nút */
+    }
+  </style>
+
+</head>
+<br><br>
+<div class="container my-4">
+    <div class="jumbotron">
+        <div class="row">
+            <div class="card border-primary mx-4 my-4" style="border-radius: 15px;">
+                <div class="card-body text-default">
+                    <h4 class="card-title">Thông tin bài kiểm tra:</h4>
+                    <p class="card-text"></p>
+                    <ul style="list-style:decimal;">
+                        <li>Khóa học: {{course.course_name}}</li>
+                        <li>Số lượng câu hỏi: {{total_questions}}</li>
+                        <li>Tổng điểm tối đa: {{total_marks}}</li>
+                    </ul>
+                    <h4 class="card-title">Quy định thực hiện:</h4>
+                    <p class="card-text"></p>
+                    <ul style="list-style:decimal;">
+                        <li>Tất cả câu hỏi thuộc dạng trắc nghiệm đa lựa chọn.</li>
+                        <li><span class="text-danger">Có thể có nhiều đáp án đúng cho mỗi câu hỏi.</span></li>
+                        <li>Số điểm cho mỗi câu hỏi có thể khác nhau.</li>
+                        <li>Thí sinh cần hoàn thành bài kiểm tra trong thời gian quy định.</li>
+                        <li>Nếu thí sinh làm mới (refresh) hoặc quay lại trang trước, câu hỏi hiện tại sẽ bị hủy và hệ thống sẽ chuyển đến câu hỏi tiếp theo.</li>
+                        <li>Câu hỏi sẽ được hệ thống hiển thị ngẫu nhiên.</li>
+                        <li>Kết quả sẽ được công bố ngay sau khi thí sinh nộp bài kiểm tra.</li>
+                    </ul>
+                    <a href="{% url 'start-exam' course.id %}" class="btn btn-primary btn-lg" style="border-radius: 15px;">Bắt đầu bài kiểm tra</a>
+                </div>
+                <div class="card-footer" style="border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
+                    Chúc bạn hoàn thành bài kiểm tra thành công!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br><br><br><br><br><br>
+{% endblock content %}

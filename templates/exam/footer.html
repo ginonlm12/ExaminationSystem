@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    footer {
+      background: linear-gradient(to right, #2a5298, #1e3c72); /* Gradient nền */
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    footer .fa {
+      padding: 10px;
+      font-size: 20px;
+      width: 40px;
+      height: 40px;
+      text-align: center;
+      text-decoration: none;
+      margin: 5px;
+      line-height: 40px;
+      border-radius: 50%;
+      background: #ffffff; /* Nền biểu tượng */
+      color: #2a5298; /* Màu biểu tượng */
+      transition: all 0.3s ease;
+    }
+
+    footer .fa:hover {
+      background: #2a5298; /* Nền chuyển sang màu gradient */
+      color: white; /* Biểu tượng chuyển sang màu trắng */
+      transform: scale(1.1);
+    }
+
+    footer p {
+      margin: 10px 0 0;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    footer small {
+      font-size: 12px;
+      color: #ccc;
+    }
+
+    footer .social-links {
+      margin-top: 15px;
+    }
+  </style>
+</head>
+
+<body>
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h4>Hệ thống thi trắc nghiệm trực tuyến</h4>
+          <p>&copy; {% now 'Y' %} - QLTTM All rights reserved.</p>
+          <div class="social-links">
+            <!-- Các biểu tượng mạng xã hội -->
+            <a href="https://www.facebook.com/l.am.hoang110203" class="fa fa-facebook" target="_blank"></a>
+            <a href="https://www.instagram.com/l_am.hoang/" class="fa fa-instagram" target="_blank"></a>
+            <a href="https://github.com/ginonlm12" class="fa fa-github" target="_blank"></a>
+          </div>
+          <small>Liên hệ: QLTTM@exam-system.com</small>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

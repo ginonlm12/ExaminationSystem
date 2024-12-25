@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #f4f6f9;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 70px;
+      padding: 20px;
+      z-index: 2;
+      background: linear-gradient(to right, #2a5298, #1e3c72);
+      color: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .left_area h3 {
+      margin: 0;
+      text-transform: uppercase;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .logout_btn {
+      padding: 8px 15px;
+      background: #e74c3c;
+      text-decoration: none;
+      color: white;
+      border-radius: 25px;
+      font-size: 14px;
+      font-weight: 600;
+      float: right;
+      margin-top: -35px;
+    }
+
+    .logout_btn:hover {
+      background: #c0392b;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 70px;
+      left: 0;
+      width: 250px;
+      height: calc(100% - 70px);
+      background: linear-gradient(to bottom, #4b79a1, #283e51);
+      color: white;
+      padding-top: 30px;
+      box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+      z-index: 1;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar.hidden {
+      left: -250px;
+    }
+
+    .sidebar .profile_image {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+      border: 3px solid #fff;
+    }
+
+    .sidebar h4,
+    .sidebar h6 {
+      color: white;
+      margin: 5px 0;
+    }
+
+    .sidebar a {
+      color: #f3f3f3;
+      font-size: 18px;
+      display: block;
+      line-height: 60px;
+      padding: 0 30px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar a:hover {
+      background: #5a6f8f;
+      border-left: 4px solid #00c8ff;
+      color: white;
+    }
+
+    .sidebar i {
+      padding-right: 15px;
+    }
+
+    .toggle-btn {
+      cursor: pointer;
+      position: fixed;
+      top: 80px;
+      left: 260px;
+      font-size: 20px;
+      z-index: 3;
+      background: #4b79a1;
+      color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .toggle-btn.hidden {
+      left: 20px;
+    }
+
+    .content {
+      margin-left: 250px;
+      padding: 20px;
+      margin-top: 70px;
+      transition: margin-left 0.3s ease;
+    }
+
+    .content.hidden {
+      margin-left: 0;
+    }
+
+    .content h1 {
+      font-size: 32px;
+      font-weight: 700;
+      font-family: 'Lora', serif;
+      color: #283e51;
+      margin-bottom: 20px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: linear-gradient(to right, #2a5298, #1e3c72);
+      color: white;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+  </style>
+
+</head>
+
+<body>
+  <header>
+    <div class="left_area">
+      <h3>Hệ Thống Quản Lý Thi Trực Tuyến</h3>
+    </div>
+    <a href="/logout" class="logout_btn">Đăng xuất</a>
+  </header>
+
+  <div class="sidebar" id="sidebar">
+    <center>
+        {% if request.user.student.profile_pic %}
+            <img src="{% static request.user.student.profile_pic.url %}" class="profile_image" alt="Profile Picture">
+        {% else %}
+            <img src="{% static 'image/student.png' %}" class="profile_image" alt="Default Avatar">
+        {% endif %}
+        <h4>{{ request.user.first_name }}</h4>
+        <h6>(Học viên)</h6>
+    </center>
+  
+    <a href="/student/student-dashboard"><i class="fas fa-tachometer-alt"></i><span>Tổng quan</span></a>
+    <a href="/student/student-exam"><i class="fas fa-book"></i><span>Bài thi</span></a>
+    <a href="/student/student-marks"><i class="fas fa-sort-numeric-up"></i><span>Điểm của tôi</span></a>
+  </div>
+
+  <div class="content" id="content">
+    {% block content %}
+    <!-- Nội dung trang -->
+    {% endblock content %}
+  </div>
+
+  <footer>
+    &copy; {% now 'Y' %} Hệ thống thi trực tuyến QLTTM. All rights reserved.
+  </footer>
+
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('toggle-btn');
+    const content = document.getElementById('content');
+
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('hidden');
+      toggleBtn.classList.toggle('hidden');
+      content.classList.toggle('hidden');
+    });
+  </script>
+
+</body>
+
+</html>

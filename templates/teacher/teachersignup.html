@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+{% load widget_tweaks %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: #f0f4f8;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    h3 {
+      text-align: center;
+      font-weight: 600;
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    label {
+      font-weight: 500;
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    .form-control {
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      font-size: 14px;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: rgb(164, 119, 213);
+      box-shadow: 0 0 5px rgba(100, 60, 142, 0.2);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      font-size: 45px; /* Font chữ lớn hơn */
+      font-weight: 900; /* Chữ đậm hơn */
+      font-family: 'Poppins', sans-serif; /* Font chữ Poppins */
+      color: white; /* Màu chữ trắng */
+      text-align: center;
+      border: none;
+      border-radius: 25px;
+      background: linear-gradient(to right, #4facfe, #00f2fe); /* Gradient chốt */
+      transition: all 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(30, 60, 114, 0.4); /* Đổ bóng */
+    }
+
+    .btn:hover {
+      background: linear-gradient(to right, #00f2fe, #4facfe); /* Gradient chốt */
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(42, 82, 152, 0.5); /* Hiệu ứng đổ bóng */
+    }
+
+    footer {
+      background-color: transparent; /* Không màu nền */
+      border-top: 1px solid #eaeaea; /* Đường viền nhẹ */
+      padding: 20px 0;
+      text-align: center;
+      font-size: 14px;
+      color: #6c757d;
+    }
+  </style>
+</head>
+
+<body>
+  {% include "exam/navbar.html" %}
+
+  <div class="container">
+    <h3>Bảng đăng ký dành cho Giáo viên</h3>
+    <form method="POST" autocomplete="off" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label for="first_name">Tên</label>
+        {% render_field userForm.first_name|attr:'required:true' class="form-control" placeholder="Vd: An" %}
+      </div>
+
+      <div class="form-group">
+        <label for="last_name">Họ</label>
+        {% render_field userForm.last_name|attr:'required:true' class="form-control" placeholder="Vd: Nguyễn Văn" %}
+      </div>
+
+      <div class="form-group">
+        <label for="mobile">Số điện thoại</label>
+        {% render_field teacherForm.mobile|attr:'required:true' class="form-control" placeholder="Vd: 0987654321" %}
+      </div>
+
+      <div class="form-group">
+        <label for="address">Địa chỉ</label>
+        {% render_field teacherForm.address|attr:'required:true' class="form-control" placeholder="Vd: 123 Đường Lê Lợi, Hà Nội" %}
+      </div>
+
+      <div class="form-group">
+        <label for="username">Tên tài khoản</label>
+        {% render_field userForm.username|attr:'required:true' class="form-control" placeholder="Vd: giaovien123" %}
+      </div>
+
+      <div class="form-group">
+        <label for="inputPassword4">Mật khẩu</label>
+        {% render_field userForm.password|attr:'required:true' class="form-control" placeholder="Nhập mật khẩu" %}
+      </div>
+
+      <div class="form-group">
+        <label for="profile_pic">Ảnh đại diện</label>
+        {% render_field teacherForm.profile_pic|attr:'required:true' class="form-control" %}
+      </div>
+
+      <button type="submit" class="btn">Đăng ký</button>
+    </form>
+  </div>
+
+  <footer>
+    Hệ thống thi trắc nghiệm trực tuyến - {% now 'Y' %}
+  </footer>
+</body>
+
+</html>

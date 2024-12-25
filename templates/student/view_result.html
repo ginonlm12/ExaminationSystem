@@ -1,0 +1,56 @@
+{% extends 'student/studentbase.html' %}
+{% block content %}
+{% load static %}
+
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h1 {
+      font-size: 50px; /* Làm chữ to */
+      font-weight: 700;
+      color: #333;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .row {
+      margin: 100px;
+    }
+
+    .panel-heading {
+      background: linear-gradient(to right,rgb(119, 137, 153),rgb(174, 174, 174)); /* Màu gradient từ xanh dương nhạt đến xanh ngọc */
+      color: white; /* Màu chữ */
+      text-align: center; /* Căn giữa nội dung */
+      padding: 20px; /* Thêm khoảng cách */
+      border-radius: 15px;
+    }
+
+    .btn {
+      border-radius: 15px; /* Làm bo tròn nút bấm */
+      background: linear-gradient(to right,rgb(11, 65, 112),rgb(29, 9, 79));
+    }
+  </style>
+</head>
+
+<div class="container">
+  <div class="panel panel-primary" style="border-radius: 15px;">
+    <div class="panel-heading" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+      <h1>HỆ THỐNG GHI NHẬN KẾT QUẢ, VUI LÒNG VÀO 'ĐIỂM CỦA TÔI' ĐỂ XEM KẾT QUẢ</h1>
+    </div>
+    <div class="text-center">
+      <a class="btn btn-success btn-lg" href="{% url 'student-marks' %}" style="border-radius: 15px;">
+        ĐIỂM CỦA TÔI
+      </a>
+    </div>
+  </div>
+</div>
+
+<br><br><br><br><br><br>
+{% endblock content %}
